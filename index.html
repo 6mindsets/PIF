@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Download Image — PIF QR</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Roboto, 'Segoe UI', Arial; margin:0; padding:24px; background:#f7f7fb; color:#111 }
+    .card { max-width:720px; margin:24px auto; background:white; padding:20px; border-radius:12px; box-shadow:0 6px 18px rgba(20,20,50,0.06); }
+    img { max-width:100%; height:auto; border-radius:8px; display:block; margin-bottom:12px; }
+    .btn { display:inline-block; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:600; background:#0b66ff; color:white; }
+    .hint { margin-top:12px; color:#555; font-size:0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Download Image</h2>
+    <p>Use the button below to download the image to your phone. If the download doesn't automatically save to your photo gallery, long-press the image and choose "Save Image" (iOS/Android).</p>
+
+    <!-- Replace "image.jpg" with your image file name. If the page is hosted at https://example.com,
+         the direct-download link below should be https://example.com/download-image (server example) -->
+    <img id="preview" src="image.jpg" alt="PIF Image (preview)">
+    <p>
+      <a id="dl" class="btn" href="image.jpg" download="pif-image.jpg">Download Image</a>
+      <a id="dl-force" class="btn" href="download-image" style="margin-left:8px;">Force Download (if available)</a>
+    </p>
+
+    <div class="hint">
+      <strong>Notes:</strong>
+      <ul>
+        <li>The <code>Download Image</code> button uses the browser download attribute — works on most Android browsers and modern browsers.</li>
+        <li>Some iOS browsers ignore the download attribute. On iPhone/iPad, long-press the image and choose <em>Save Image</em>.</li>
+        <li>If you have a server, use the <em>Force Download</em> link pointing to an endpoint that serves the image with <code>Content-Disposition: attachment</code> — this triggers a download on most devices.</li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <h4>QR Code</h4>
+    <p>To create a QR that points users directly to the download URL, generate a QR using a service such as:</p>
+    <pre>https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=PUT_YOUR_DOWNLOAD_URL_HERE</pre>
+    <p>Replace <code>PUT_YOUR_DOWNLOAD_URL_HERE</code> with your public download URL (for example <code>https://example.com/download-image</code>).</p>
+  </div>
+
+  <script>
+    // Extra: try to trigger a download programmatically (works in many Android browsers / Chrome)
+    document.getElementById('dl-force').addEventListener('click', function(e){
+      // If the server supports /download-image that sets Content-Disposition, navigate there
+      // Otherwise, fallback will be the static href and user can long-press to save.
+      // No extra action required here.
+    });
+  </script>
+</body>
+</html>
